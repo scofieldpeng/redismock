@@ -150,12 +150,12 @@ func (m *ClientMock) ZIncrBy(key string, increment float64, member string) *redi
 	return m.Called(key, increment, member).Get(0).(*redis.FloatCmd)
 }
 
-func (m *ClientMock) ZInterStore(destination string, store *redis.ZStore, keys ...string) *redis.IntCmd {
+func (m *ClientMock) ZInterStore(destination string, store *redis.ZStore) *redis.IntCmd {
 	if !m.hasStub("ZInterStore") {
 		return m.client.ZInterStore(destination, store)
 	}
 
-	return m.Called(destination, store, keys).Get(0).(*redis.IntCmd)
+	return m.Called(destination, store).Get(0).(*redis.IntCmd)
 }
 
 func (m *ClientMock) ZRange(key string, start, stop int64) *redis.StringSliceCmd {
@@ -294,10 +294,10 @@ func (m *ClientMock) ZScore(key, member string) *redis.FloatCmd {
 	return m.Called(key, member).Get(0).(*redis.FloatCmd)
 }
 
-func (m *ClientMock) ZUnionStore(dest string, store *redis.ZStore, keys ...string) *redis.IntCmd {
+func (m *ClientMock) ZUnionStore(dest string, store *redis.ZStore) *redis.IntCmd {
 	if !m.hasStub("ZUnionStore") {
 		return m.client.ZUnionStore(dest, store)
 	}
 
-	return m.Called(dest, store, keys).Get(0).(*redis.IntCmd)
+	return m.Called(dest, store).Get(0).(*redis.IntCmd)
 }

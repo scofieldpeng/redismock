@@ -1,17 +1,16 @@
-package redismock_test
+package redismock
 
 import (
 	"errors"
 	"testing"
 
 	"github.com/alicebob/miniredis"
-	"github.com/elliotchance/redismock"
 	"github.com/go-redis/redis/v7"
 	"github.com/stretchr/testify/assert"
 )
 
 // newTestRedis returns a redis.Cmdable.
-func newTestRedis() *redismock.ClientMock {
+func newTestRedis() *ClientMock {
 	mr, err := miniredis.Run()
 	if err != nil {
 		panic(err)
@@ -21,7 +20,7 @@ func newTestRedis() *redismock.ClientMock {
 		Addr: mr.Addr(),
 	})
 
-	return redismock.NewNiceMock(client)
+	return NewNiceMock(client)
 }
 
 // This would be your production code.
